@@ -1,0 +1,12 @@
+# @package _global_
+
+env: synth
+
+config:
+  observation_filter: NoFilter
+
+  env_config:
+    n_dimensions: 7
+    n_states: 2
+    env_gen_seed: 1
+    use_mlp_reward_function: True

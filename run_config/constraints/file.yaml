@@ -1,0 +1,9 @@
+# @package _global_
+
+config:
+  model:
+    custom_model_config:
+      polytope_storage_method: file #seed, file
+      polytope_generation_method: null #points #points, rejection_sampling, unconstrained
+      polytope_generation_data:
+        path: ../constraints.npz

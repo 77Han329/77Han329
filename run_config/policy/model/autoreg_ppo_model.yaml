@@ -1,0 +1,27 @@
+# @package _global_
+
+config:
+  model:
+    fcnet_hiddens: [32, 32]
+    fcnet_activation: relu #relu, tanh
+    vf_share_layers: False    
+
+    custom_model: AutoRegressiveModel
+
+    custom_model_config:
+      fcnet_critic_hiddens: [32, 32]
+      add_only_action: True #wheter to also add the distribution parameters to the autoregressive heads as inputs
+      num_process_lp_solver: 8
+      use_lp_parallel: True
+      feas_tol: 1.0e-6
+      opt_tol: 1.0e-8
+      state_encoder_hidden_dim: 32
+      fcnet_use_activation_function_after_last_layer: True
+      fc_hiddens_uniform_autoreg_branches: [32,32]
+      fc_hiddens_uniform_autoreg_branches_activation: relu #relu, tanh
+      action_distribution_activation_function: exponential #softplus
+      uniform_bias_init: True #True, False wheter to use mle to hava a uniform init of the distributions
+      uniform_bias_number_of_samples_in_polytope: 100000 #how many samples from inside the polytope to use to estimate the uniform init params
+      action_dist_name: beta #beta, truncnorm, squashed_gaussian (squasshed gaussian does not has closed-form entropy, set ent_coeff to 0!!!!)
+
+

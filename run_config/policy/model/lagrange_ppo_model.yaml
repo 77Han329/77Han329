@@ -1,0 +1,16 @@
+# @package _global_
+
+config:
+  model:
+    fcnet_hiddens: [32,32]
+    fcnet_activation: relu
+    vf_share_layers: False
+    
+    custom_model: LambdaCustomModel
+
+    custom_model_config:
+      config_lambda_model:
+          lambda_model_lr: 0.035
+          lagrangian_upper_bound: null #number or null upper bound for the lambdas
+          lagrange_multiplier_init: 1.0 #1.0 #initial value for the lagrange multipliers (should be >0)
+          cost_limit: 0.0 #limit of how much constraint violation is allowed

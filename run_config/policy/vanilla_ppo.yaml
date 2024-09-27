@@ -1,0 +1,23 @@
+# @package _global_
+
+run: PPO
+
+config:
+  lr: 1.0e-3
+  lambda: 0.95
+  kl_coeff: 0.0
+  clip_param: 0.3
+  num_sgd_iter: 10
+  
+  grad_clip: 2.0
+  vf_loss_coeff: 0.5
+  train_batch_size: 512
+  sgd_minibatch_size: 64
+  entropy_coeff: 0.01 #0.01
+  vf_clip_param: .inf #this is also quite important
+
+  model:
+    custom_action_dist: TorchDirichletCustomStable # needed since we do not specify the Simplex action space any more
+
+defaults:
+  - model: vanilla_ppo_model

@@ -1,0 +1,24 @@
+# @package _global_
+
+env: financial-markets-env-short-selling-v0
+
+config:
+  env_config:
+    include_cash_asset: True
+    include_unobservable_market_state_information_for_evaluation: false
+    data_set_name: model_parameter_data_set_G_markov_states_2_12
+    initial_portfolio_wealth: 1.0
+    terminal_time_step: 12
+    env_mode_trajectory: NORMAL
+    env_mode: TRAINING
+    total_number_predetermined_training_trajectory: 100000 #if env_mode_trajectory is NORMAL this is ignored
+    use_frame_stack: False
+    num_stack: 4 #number of frames to stack if use_frame_stack is True
+  evaluation_config:
+    env_config:
+      env_mode_trajectory: PRESAMPLED
+      env_mode: EVALUATION
+      total_number_predetermined_eval_trajectory: 200
+      reset_periodicity_eval_env: 200
+
+

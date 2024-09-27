@@ -1,0 +1,8 @@
+# @package _global_
+
+env: compute
+
+config:
+  env_config:
+    seed: 1
+    environment_parameters_set_name: parameter_set_9_9_id_0

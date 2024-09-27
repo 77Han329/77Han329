@@ -1,0 +1,51 @@
+# @package _global_
+
+run: CPO
+
+config:
+  lr: 0.0 #this learning rate is not used
+  lambda: 0.95
+  use_gae: True
+
+  num_sgd_iter: 1 #be carefull here because the training is very different to regular (2nd order update first and then several minibatch updates for the value function)
+
+  use_critic: True
+  
+  simple_optimizer: True
+
+  train_batch_size: 512
+  sgd_minibatch_size: 512 #set this to train_batch_size for full batch training
+  entropy_coeff: 0.0
+  vf_clip_param: .inf #this is also quite important
+
+  target_kl: 0.01
+  cg_damping: 0.1
+  cg_iterations: 15 #number of iterations for the conjugate gradient algorithm (carefull changing this)
+
+  cost_limit: 0.0 #maximum cost for the optimization problem (0.0 maybe be unstable)
+
+  num_critic_update_iter: 10 #number of iterations for the value function update
+  use_critic_norm: True #add L2 norm to the value function loss
+  critic_norm_coef: 0.001 #coefficient for the L2 norm of the value function loss
+
+  use_max_grad_norm: True #use the maximum gradient norm for the value function update
+  max_grad_norm: 40 #maximum gradient norm for the value function update
+
+  total_steps_line_search: 20
+
+  norm_grads: False #normalize the conjugate gradients (carfull changing this)
+  bootstrap_costs: False #bootstrap the costs for the value function if there are non complete episodes
+
+  mini_batch_size_critic: 64 #mini batch size for the value function update
+
+  standardize_advantages: True #standardize the advantages for the value function update
+  standardize_costs: False #standardize the costs for the value function update
+
+  lr_value_critic: 1.0e-3 #learning rate for the value function update
+  lr_cost_critic: 1.0e-3 #learning rate for the cost function update
+
+  model:
+    custom_action_dist: TorchDirichletCustomStable # needed since we do not specify the Simplex action space any more
+
+defaults:
+  - model: cpo_model

@@ -1,0 +1,5 @@
+# @package _global_
+
+defaults:
+  - override /policy: cpo
+  - override /rollout_config: on_policy

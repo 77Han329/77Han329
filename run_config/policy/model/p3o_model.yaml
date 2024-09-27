@@ -1,0 +1,16 @@
+# @package _global_
+
+config:
+  model:
+    fcnet_hiddens: [32, 32]
+    fcnet_activation: relu
+
+    vf_share_layers: False
+
+    custom_model: CostValueFunctionCustomModel
+    custom_model_config:
+        cost_vf_share_layers: False
+        cost_vf_use_gae: True
+        cost_vf_use_critic: True
+        
+        init_kappa: 20.0

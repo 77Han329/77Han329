@@ -1,0 +1,54 @@
+local_dir: ./.logging
+
+stop:
+    timesteps_total: 150000
+
+checkpoint_config:
+    checkpoint_at_end: true
+    checkpoint_frequency: 100
+
+config:
+  keep_per_episode_custom_metrics: True
+  framework: torch
+  seed: 999
+  gamma: 1.0
+
+  # normalize the observations (especially important for the compute environment)
+  observation_filter: MeanStdFilter
+
+  normalize_actions: False #VERY IMPORTANT!!!
+  disable_env_checking: True #Very important otherwise rllib runs tests with actions that are invalid
+  clip_actions: False
+
+  simple_optimizer: True
+
+  evaluation_num_workers: 0
+  evaluation_interval: 10 #10 #1
+  evaluation_duration: 20 #number of evaluation episodes
+  evaluation_duration_unit: episodes
+  
+  evaluation_config:
+    explore: True #deterministic evaluation if set to false
+
+
+  callbacks: EvaluationLoggerCallback
+
+  logger_config:
+    # Use the tune.logger.NoopLogger class for no logging.
+    type: ray.tune.logger.NoopLogger #ray.tune.logger.JsonLogger ray.tune.logger.NoopLogger
+
+verbose: 0
+callbacks: [WandbLoggerCallback]
+
+local_mode: False #set ray local mode (useful for debugging)
+
+number_of_torch_threads: 8 #set the degree of parallelism for the torch cpu backend
+
+group_name_wandb: test #set group name for wandb via hydra
+
+
+defaults:
+  - env_config: synth_env
+  - policy: lagrange_ppo
+  - constraints: default
+  - rollout_config: on_policy

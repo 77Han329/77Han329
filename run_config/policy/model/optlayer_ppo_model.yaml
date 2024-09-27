@@ -1,0 +1,11 @@
+# @package _global_
+
+config:
+  model:
+    vf_share_layers: False
+    fcnet_hiddens: [32, 32]
+    fcnet_activation: relu
+
+    custom_model_config:
+      optlayer_mode: CPC #CP, CC, CPC
+      normalize_constraints: False

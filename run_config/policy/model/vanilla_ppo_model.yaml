@@ -1,0 +1,7 @@
+# @package _global_
+
+config:
+  model:
+    fcnet_hiddens: [32,32]
+    fcnet_activation: relu
+    vf_share_layers: False
