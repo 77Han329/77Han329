@@ -1,7 +1,7 @@
 # Autoregressive Policy Optimization for Constrained Allocation Tasks
 
 ## Summary
-This repository contains the code and data for the paper "Autoregressive Policy Optimization for Constrained Allocation Tasks" submitted to NeurIPS24.
+This repository contains the code and data for the paper "Autoregressive Policy Optimization for Constrained Allocation Tasks" accepted at NeurIPS24.
 
 ## Table of Contents
 - [Introduction](#introduction)
