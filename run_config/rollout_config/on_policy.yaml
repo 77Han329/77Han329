@@ -3,5 +3,5 @@
 config:
   batch_mode: truncate_episodes
   rollout_fragment_length: 512
-  num_envs_per_worker: 8
+  num_envs_per_worker: 1
   num_workers: 0

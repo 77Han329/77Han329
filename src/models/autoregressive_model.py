@@ -88,6 +88,13 @@ class TorchAutoregressiveActionModel(TorchModelV2, torch.nn.Module):
             _inversion_bias = torch.log #TODO do not hardcode
             
             
+        self.rnn = torch.nn.RNN(input_size = self.state_encoder_hidden_dim,
+                               hidden_size = num_outputs,
+                                num_layers=1,
+                                batch_first=True)
+        self.value_head = torch.nn.Linear(hidden_size,num_outputs)
+            
+            
             
         modules = []
         for dim in range(self.n_dimensions - 1):
@@ -143,9 +150,14 @@ class TorchAutoregressiveActionModel(TorchModelV2, torch.nn.Module):
         self._last_flat_in = obs.reshape(obs.shape[0], -1)
 
         self._hidden_state = self.state_encoder(self._last_flat_in)
+        rnn_input = self._hidden_state.unsqueeze(1)
+        h_prev = state
+        rnn_out, h_next = self.rnn(rnn_input, h_prev)
+        value = self.value_head(rnn_out[:, -1, :])
         if not self.vf_share:
             self._value = torch.reshape(self.value_net(self._last_flat_in), [-1])
-        return self._hidden_state, state
+        
+        return value, h_next,{}
 
     def value_function(self):
         if self.vf_share:

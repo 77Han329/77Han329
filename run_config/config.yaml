@@ -40,7 +40,7 @@ config:
 verbose: 0
 callbacks: [WandbLoggerCallback]
 
-local_mode: False #set ray local mode (useful for debugging)
+local_mode: True #set ray local mode (useful for debugging)
 
 number_of_torch_threads: 8 #set the degree of parallelism for the torch cpu backend
 
@@ -49,6 +49,6 @@ group_name_wandb: test #set group name for wandb via hydra
 
 defaults:
   - env_config: synth_env
-  - policy: lagrange_ppo
+  - policy: autoreg_ppo
   - constraints: default
   - rollout_config: on_policy
